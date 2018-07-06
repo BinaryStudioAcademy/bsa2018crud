@@ -31,7 +31,8 @@ class Task2Test extends TestCase
             'name',
             'short_name',
             'actual_course',
-            'actual_course_date'
+            'actual_course_date',
+            'active'
         ]);
     }
 

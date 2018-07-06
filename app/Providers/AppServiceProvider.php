@@ -37,6 +37,22 @@ class AppServiceProvider extends ServiceProvider
                         1000,
                         new \DateTime(),
                         true
+                    ),
+                    new Currency(
+                        2,
+                        'somecoin',
+                        'btc',
+                        1000,
+                        new \DateTime(),
+                        true
+                    ),
+                    new Currency(
+                        3,
+                        'somecoin',
+                        'btc',
+                        1000,
+                        new \DateTime(),
+                        false
                     )
                 ]);
             }        

@@ -100,4 +100,14 @@ class Currency
     {
         return $this->isActive;
     }
+
+    public function setActualCourse(float $course)
+    {
+        $this->actualCourse = $course;
+    }
+
+    public function setActualCourseDate(\DateTime $courseDate)
+    {
+        $this->actualCourseDate = $courseDate;
+    }
 }

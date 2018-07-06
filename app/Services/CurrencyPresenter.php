@@ -14,7 +14,9 @@ class CurrencyPresenter
             'name' => $currency->getName(),
             'short_name' => $currency->getShortName(),
             'actual_course' => $currency->getActualCourse(),
-            'actual_course_date' => Carbon::instance($currency->getActualCourseDate())->toDateString()
+            'actual_course_date' => Carbon::instance($currency->getActualCourseDate())
+                ->format('Y-m-d H-i-s'),
+            'active' => $currency->isActive()
         ];
     }
 

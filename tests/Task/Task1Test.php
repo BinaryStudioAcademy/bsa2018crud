@@ -54,6 +54,20 @@ class Task1Test extends TestCase
         $this->assertCurrenciesData($currencies);
     }
 
+    public function test_currency_repository_find_active()
+    {
+        $repository = $this->app->make(CurrencyRepositoryInterface::class);
+
+        $currencies = $repository->findActive();
+
+        $this->assertNotEmpty($currencies);
+        
+        foreach ($currencies as $currency) {
+            $this->assertInstanceOf(Currency::class, $currency);
+            $this->assertTrue($currency->isActive());
+        }
+    }
+
     public function test_currency_repository_find_by_id_not_found()
     {
         $repository = $this->app->make(CurrencyRepositoryInterface::class);
@@ -91,7 +105,7 @@ class Task1Test extends TestCase
             $this->assertNotEmpty($currency->getShortName());
             $this->assertNotEmpty($currency->getActualCourse());
             $this->assertNotEmpty($currency->getActualCourseDate());
-            $this->assertNotEmpty($currency->isActive());
+            $this->assertContains($currency->isActive(), [true, false]);
         }
     }
 
@@ -116,9 +130,16 @@ class Task1Test extends TestCase
                'name',
                'short_name',
                'actual_course',
-               'actual_course_date'
+               'actual_course_date',
+               'active'
            ]
-       ]);
+        ]);
+    
+        $responseData = $response->json();
+
+        foreach ($responseData as $item) {
+            $this->assertEquals(true, $item['active']);
+        }
    }
 
    public function testUnecessaryRoutes()

@@ -15,10 +15,10 @@ class CurrencyController extends Controller
         $this->repository = $repository;
     }
 
-    public function getCurrencies()
+    public function getCurrenciesActive()
     {
         return response()->json(
-            CurrencyPresenter::presentCollection($this->repository->findAll())
+            CurrencyPresenter::presentCollection($this->repository->findActive())
         );
     }
 

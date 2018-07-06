@@ -2,6 +2,8 @@
 
 namespace App\Services;
 
+use App\Services\Currency;
+
 class BaseCurrencyRepository implements CurrencyRepositoryInterface
 {
     private $currencies;
@@ -29,5 +31,22 @@ class BaseCurrencyRepository implements CurrencyRepositoryInterface
     public function save(Currency $currency): void
     {
         $this->currencies[$currency->getId()] = $currency;
+    }
+
+    public function findActive(): array
+    {
+        return array_values(
+            array_filter(
+                $this->currencies,
+                function(Currency $item) {
+                    return $item->isActive();
+                }
+            )
+        );
+    }
+
+    public function delete(Currency $currency): void
+    {
+        unset($this->currencies[$currency->getId()]);
     }
 }
