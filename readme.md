@@ -30,7 +30,7 @@ php artisan key:generate
 
 Реализовать класс `Currency`.
 
-Реализовать интерфейс `CurrencyRepository`. 
+Реализовать интерфейс `CurrencyRepositoryInterface`. 
 
 Реализовать API для получения списка всех АКТИВНЫХ (active=true) в системе е-валют. Формат возвращаемых данных: JSON.
 Поля данных которые необходимо вернуть для каждой из валют: 'id', 'name', 'short_name', 'actual_course', 'actual_course_date'.
@@ -66,4 +66,5 @@ php artisan key:generate
 
 ```
 ./vendor/bin/phpunit
+./vendor/bin/phpunit --testsuite task1
 ```

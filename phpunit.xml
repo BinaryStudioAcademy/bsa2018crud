@@ -17,8 +17,16 @@
             <directory suffix="Test.php">./tests/Unit</directory>
         </testsuite>
 
-        <testsuite name="Task">
-            <directory suffix="Test.php">./tests/Task</directory>
+        <testsuite name="task1">
+            <file suffix="Test.php">./tests/Task1Test.php</file>
+        </testsuite>
+
+        <testsuite name="task2">
+            <file suffix="Test.php">./tests/Task2Test.php</file>
+        </testsuite>
+
+        <testsuite name="task3">
+            <file suffix="Test.php">./tests/Task3Test.php</file>
         </testsuite>
     </testsuites>
     <filter>
