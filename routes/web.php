@@ -11,6 +11,7 @@
 |
 */
 
-Route::get('/', function () {
+Route::get('/admin/currencies', function () {
     return view('welcome');
 });
+
