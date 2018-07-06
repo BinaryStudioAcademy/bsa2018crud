@@ -41,19 +41,4 @@ class Task2Test extends TestCase
         $response =  $this->json('GET', self::ENDPOINT . '/99999999');
         $response->assertStatus(404);
     }
-
-    public function testUnecessaryRoutes()
-    {
-        $response =  $this->json('POST', self::ENDPOINT . '/1');
-        $response->assertStatus(405);
-
-        $response =  $this->json('DELETE', self::ENDPOINT . '/1');
-        $response->assertStatus(405);
-
-        $response =  $this->json('PATCH', self::ENDPOINT . '/1');
-        $response->assertStatus(405);
-
-        $response =  $this->json('PUT', self::ENDPOINT . '/1');
-        $response->assertStatus(405);
-    }
 }

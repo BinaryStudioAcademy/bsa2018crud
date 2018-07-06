@@ -35,16 +35,14 @@ php artisan key:generate
 Реализовать API для получения списка всех АКТИВНЫХ (active=true) в системе е-валют. Формат возвращаемых данных: JSON.
 Поля данных которые необходимо вернуть для каждой из валют: 'id', 'name', 'short_name', 'actual_course', 'actual_course_date'.
 
-* Route: /api/currencies
-* Тип HTTP запроса: только GET. При попытке обратиться к api-endpoint с другим типом запроса должен возрващаться Error Response с кодом 405; 
+* Route: GET /api/currencies
 
 ### Задание #2
 
 Реализовать API для получения детальной информации о конкретной е-валюте. Формат возвращаемых данных: JSON.
 Поля данных, которые необходимо вернуть в списке валют: 'id', name', 'short_name', 'actual_course', 'actual_course_date', 'active'.
 
-* Route: /api/currencies/{id}
-* Тип HTTP запроса: только GET. При попытке обратиться к api-endpoint с другим типом запроса должен возрващаться Error Response с кодом 405;
+* Route: GET /api/currencies/{id}
 * В случае запроса информации о валюте, id которой отсутствует, необходимо вернуть Error HTTP Response с кодом 404.
 
 ### Задание #3

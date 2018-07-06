@@ -141,19 +141,4 @@ class Task1Test extends TestCase
             $this->assertEquals(true, $item['active']);
         }
    }
-
-   public function testUnecessaryRoutes()
-   {
-       $response =  $this->json('POST', self::ENDPOINT);
-       $response->assertStatus(405);
-
-       $response =  $this->json('DELETE', self::ENDPOINT);
-       $response->assertStatus(405);
-
-       $response =  $this->json('PATCH', self::ENDPOINT);
-       $response->assertStatus(405);
-
-       $response =  $this->json('PUT', self::ENDPOINT);
-       $response->assertStatus(405);
-   }
 }
