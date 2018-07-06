@@ -35,6 +35,12 @@ class Task3Test extends TestCase
         ]);
     }
 
+    public function testShowNotExistingId()
+    {
+        $response =  $this->json('GET', self::ENDPOINT . '/99999999');
+        $response->assertStatus(404);
+    }
+
     public function testStore()
     {
         $storeData = [
@@ -66,9 +72,26 @@ class Task3Test extends TestCase
         $response->assertJsonFragment($storeData);
     }
 
+    public function testUpdateNotExistingId()
+    {
+        $storeData = [
+            'actual_course' => 10001.01,
+            'actual_course_date' => date('Y-m-d H-i-s')
+        ];
+
+        $response =  $this->json('PATCH', self::ENDPOINT . '/99999999', $storeData);
+        $response->assertStatus(404);
+    }
+
     public function testDestroy()
     {
         $response =  $this->json('DELETE', self::ENDPOINT . '/1');
         $response->assertStatus(200);
+    }
+
+    public function testDestroyNotExistingId()
+    {
+        $response =  $this->json('DELETE', self::ENDPOINT . '/99999999');
+        $response->assertStatus(404);
     }
 }
