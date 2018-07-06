@@ -9,7 +9,6 @@ use Tests\TestCase;
  */
 class Task2Test extends TestCase
 {
-
     const ENDPOINT = '/api/currencies';
 
     public function testStatus()

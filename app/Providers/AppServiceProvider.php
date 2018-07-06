@@ -3,6 +3,9 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use App\Services\CurrencyRepositoryInterface;
+use App\Services\BaseCurrencyRepository;
+use App\Services\Currency;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -23,6 +26,20 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->bind(
+            CurrencyRepositoryInterface::class, 
+            function() {
+                return new BaseCurrencyRepository([
+                    new Currency(
+                        1,
+                        'somecoin',
+                        'btc',
+                        1000,
+                        new \DateTime(),
+                        true
+                    )
+                ]);
+            }        
+        );
     }
 }

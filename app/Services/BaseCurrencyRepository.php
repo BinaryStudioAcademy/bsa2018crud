@@ -8,7 +8,9 @@ class BaseCurrencyRepository implements CurrencyRepositoryInterface
 
     public function __construct(array $currencies = [])
     {
-        $this->currencies = $currencies;
+        foreach ($currencies as $currency) {
+            $this->currencies[$currency->getId()] = $currency;   
+        }        
     }
 
     /**
@@ -16,7 +18,7 @@ class BaseCurrencyRepository implements CurrencyRepositoryInterface
      */
     public function findAll(): array
     {
-        return $this->currencies;
+        return array_values($this->currencies);
     }
 
     public function findById(int $id): ?Currency
@@ -26,10 +28,6 @@ class BaseCurrencyRepository implements CurrencyRepositoryInterface
 
     public function save(Currency $currency): void
     {
-        if ($this->findById($currency->getId())) {
-            throw new \LogicException('Id exists');
-        }
-
         $this->currencies[$currency->getId()] = $currency;
     }
 }

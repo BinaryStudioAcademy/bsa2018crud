@@ -18,15 +18,15 @@
         </testsuite>
 
         <testsuite name="task1">
-            <file suffix="Test.php">./tests/Task1Test.php</file>
+            <file>./tests/Task/Task1Test.php</file>
         </testsuite>
 
         <testsuite name="task2">
-            <file suffix="Test.php">./tests/Task2Test.php</file>
+            <file>./tests/Task/Task2Test.php</file>
         </testsuite>
 
         <testsuite name="task3">
-            <file suffix="Test.php">./tests/Task3Test.php</file>
+            <file>./tests/Task/Task3Test.php</file>
         </testsuite>
     </testsuites>
     <filter>

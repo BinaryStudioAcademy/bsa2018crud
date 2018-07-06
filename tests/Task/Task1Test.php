@@ -19,7 +19,7 @@ class Task1Test extends TestCase
 
         $currency = new Currency(
             1,
-            'bitcoin',
+            'somecoin',
             'btc',
             1000,
             $date,
@@ -27,7 +27,7 @@ class Task1Test extends TestCase
         );
 
         $this->assertEquals(1, $currency->getId());
-        $this->assertEquals('crypto', $currency->getName());
+        $this->assertEquals('somecoin', $currency->getName());
         $this->assertEquals('btc', $currency->getShortName());
         $this->assertEquals(1000, $currency->getActualCourse());
         $this->assertEquals($date, $currency->getActualCourseDate());
@@ -52,16 +52,13 @@ class Task1Test extends TestCase
 
         $this->assertNotEmpty($currencies);
         $this->assertCurrenciesData($currencies);
-
     }
 
-    public function test_currency_repository_find_by_id()
+    public function test_currency_repository_find_by_id_not_found()
     {
         $repository = $this->app->make(CurrencyRepositoryInterface::class);
 
-        $currency = $repository->findById(1);
-
-        $this->assertEquals(1, $currency->getId());
+        $this->assertNull($repository->findById(999999));
     }
 
     public function test_currency_repository_save()
@@ -69,8 +66,8 @@ class Task1Test extends TestCase
         $repository = $this->app->make(CurrencyRepositoryInterface::class);
 
         $currency = new Currency(
-            1,
-            'bitcoin',
+            999,
+            'somecoin',
             'btc',
             1000,
             new \DateTime(),
@@ -79,29 +76,10 @@ class Task1Test extends TestCase
 
         $repository->save($currency);
 
-        $currency = $repository->findById(1);
+        $currency = $repository->findById(999);
 
-        $this->assertEquals(1, $currency->getId());
-    }
-
-    public function test_currency_repository_save_duplicate_not_allowed()
-    {
-        $repository = $this->app->make(CurrencyRepositoryInterface::class);
-
-        $currency = new Currency(
-            1,
-            'bitcoin',
-            'btc',
-            1000,
-            new \DateTime(),
-            true
-        );
-
-        $repository->save($currency);
-
-        $this->expectException(\LogicException::class);
-
-        $repository->save($currency);
+        $this->assertEquals(999, $currency->getId());
+        $this->assertEquals('somecoin', $currency->getName());
     }
 
     private function assertCurrenciesData(array $currencies): void
@@ -117,44 +95,44 @@ class Task1Test extends TestCase
         }
     }
 
-//    public function testStatus()
-//    {
-//        $response =  $this->json('GET', self::ENDPOINT);
-//        $response->assertStatus(200);
-//    }
-//
-//    public function testHeader()
-//    {
-//        $response =  $this->json('GET', self::ENDPOINT);
-//        $response->assertHeader('Content-Type', 'application/json');
-//    }
-//
-//    public function testStructure()
-//    {
-//        $response =  $this->json('GET', self::ENDPOINT);
-//        $response->assertJsonStructure([
-//            [
-//                'id',
-//                'name',
-//                'short_name',
-//                'actual_course',
-//                'actual_course_date'
-//            ]
-//        ]);
-//    }
-//
-//    public function testUnecessaryRoutes()
-//    {
-//        $response =  $this->json('POST', self::ENDPOINT);
-//        $response->assertStatus(405);
-//
-//        $response =  $this->json('DELETE', self::ENDPOINT);
-//        $response->assertStatus(405);
-//
-//        $response =  $this->json('PATCH', self::ENDPOINT);
-//        $response->assertStatus(405);
-//
-//        $response =  $this->json('PUT', self::ENDPOINT);
-//        $response->assertStatus(405);
-//    }
+   public function testStatus()
+   {
+       $response =  $this->json('GET', self::ENDPOINT);
+       $response->assertStatus(200);
+   }
+
+   public function testHeader()
+   {
+       $response =  $this->json('GET', self::ENDPOINT);
+       $response->assertHeader('Content-Type', 'application/json');
+   }
+
+   public function testStructure()
+   {
+       $response =  $this->json('GET', self::ENDPOINT);
+       $response->assertJsonStructure([
+           [
+               'id',
+               'name',
+               'short_name',
+               'actual_course',
+               'actual_course_date'
+           ]
+       ]);
+   }
+
+   public function testUnecessaryRoutes()
+   {
+       $response =  $this->json('POST', self::ENDPOINT);
+       $response->assertStatus(405);
+
+       $response =  $this->json('DELETE', self::ENDPOINT);
+       $response->assertStatus(405);
+
+       $response =  $this->json('PATCH', self::ENDPOINT);
+       $response->assertStatus(405);
+
+       $response =  $this->json('PUT', self::ENDPOINT);
+       $response->assertStatus(405);
+   }
 }
