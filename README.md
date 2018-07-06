@@ -1,6 +1,6 @@
 # Binary Studio Academy 2018
 
-## PHP Testing
+## Laravel CRUD
 
 ### Цель
 
